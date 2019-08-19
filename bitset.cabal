@@ -15,7 +15,7 @@ Author:               Sergei Lebedev <superbobry@gmail.com>
 Maintainer:           superbobry@gmail.com
 Bug-reports:          http://github.com/lambda-llama/bitset/issues
 Stability:            Experimental
-Build-type:           Custom
+Build-type:           Simple
 Tested-with:          GHC == 7.4.1, GHC == 7.6.3, GHC == 7.8.4
 Extra-Source-Files:   bin/mkDerivedGmpConstants.c, include/bitset.h
 
@@ -48,10 +48,11 @@ Library
                     , ghc-prim
 
   Exposed-modules:    Data.BitSet
-                    , Data.BitSet.Dynamic
+                    -- , Data.BitSet.Dynamic
                     , Data.BitSet.Generic
                     , Data.BitSet.Word
-  Other-modules:      GHC.Integer.GMP.PrimExt
+  Other-modules:     
+                    -- GHC.Integer.GMP.PrimExt
                     -- , GHC.Integer.GMP.TypeExt
 
 Test-suite bitset-tests

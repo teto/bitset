@@ -11,6 +11,6 @@
 -- A space-efficient implementation of set data structure for enumerated
 -- data types.
 
-module Data.BitSet ( module Data.BitSet.Dynamic ) where
+module Data.BitSet () where
 
-import Data.BitSet.Dynamic
+-- import Data.BitSet.Dynamic

@@ -97,7 +97,7 @@ import qualified Data.List as List
 
 -- | A bit set with unspecified container type.
 newtype BitSet c a = BitSet { getBits :: c }
-   deriving (Eq, NFData, Storable, Ord, Typeable)
+   deriving (Eq, NFData, Storable, Ord, Typeable, Semigroup)
 
 instance (Enum a, Read a, Bits c) => Read (BitSet c a) where
     readPrec = parens . prec 10 $ do
@@ -108,11 +108,10 @@ instance (Enum a, Show a, Bits c) => Show (BitSet c a) where
     showsPrec p bs = showParen (p > 10) $
                      showString "fromList " . shows (toList bs)
 
-instance Bits c => Monoid (BitSet c a) where
+-- (<>) :: a -> a -> a
+instance (Semigroup c, Bits c) => Monoid (BitSet c a) where
     mempty  = empty
     mappend = union
-    -- random addition
-    mconcat = undefined
 
 #if defined(__GLASGOW_HASKELL__) && (__GLASGOW_HASKELL__ >= 707)
 instance (Enum a, Bits c) => IsList (BitSet c a) where

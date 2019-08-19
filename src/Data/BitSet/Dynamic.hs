@@ -79,7 +79,7 @@ import GHC.Base (Int(..))
 
 import Control.DeepSeq (NFData(..))
 
-import GHC.Integer.GMP.TypeExt (popCountInteger, testBitInteger,
+import GHC.Integer.GMP.Prim (popCountInteger, testBitInteger,
                                 setBitInteger, clearBitInteger)
 import qualified Data.BitSet.Generic as GS
 

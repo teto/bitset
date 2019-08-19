@@ -111,6 +111,8 @@ instance (Enum a, Show a, Bits c) => Show (BitSet c a) where
 instance Bits c => Monoid (BitSet c a) where
     mempty  = empty
     mappend = union
+    -- random addition
+    mconcat = undefined
 
 #if defined(__GLASGOW_HASKELL__) && (__GLASGOW_HASKELL__ >= 707)
 instance (Enum a, Bits c) => IsList (BitSet c a) where

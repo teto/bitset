@@ -13,10 +13,13 @@ module GHC.Integer.GMP.TypeExt
 #include "MachDeps.h"
 
 import GHC.Integer.GMP.Internals (Integer(..))
-import GHC.Integer.GMP.Prim (int2Integer#)
+-- import GHC.Integer.GMP.Prim (int2Integer#)
 import GHC.Prim (Int#, (/=#), (>=#), (<#), (-#),
                  int2Word#, word2Int#, popCnt#,
                  negateInt#, and#, or#, xor#, uncheckedIShiftL#)
+-- toInteger
+-- old doc
+-- https://hackage.haskell.org/package/integer-gmp-0.5.1.0/docs/GHC-Integer-GMP-Internals.html
 
 import GHC.Integer.GMP.PrimExt (popCountInteger#, testBitInteger#,
                                 setBitInteger#, clearBitInteger#)
@@ -39,7 +42,7 @@ testBitInteger (S# j) i
         let !mask = 1# `uncheckedIShiftL#` i in
         isTrue# (word2Int# (int2Word# j `and#` int2Word# mask) /=# 0#)
     | otherwise =
-        let !(# s, d #) = int2Integer# j in testBitInteger (J# s d) i
+        let !(# s, d #) = smallInteger# j in testBitInteger (J# s d) i
 testBitInteger (J# s d) i = isTrue# (testBitInteger# s d i /=# 0#)
 {-# NOINLINE testBitInteger #-}
 
@@ -50,7 +53,7 @@ setBitInteger (S# j) i
         let !mask = 1# `uncheckedIShiftL#` i in
         S# (word2Int# (int2Word# j `or#` int2Word# mask))
     | otherwise =
-        let !(# s, d #) = int2Integer# j in setBitInteger (J# s d) i
+        let !(# s, d #) = smallInteger# j in setBitInteger (J# s d) i
 setBitInteger (J# s d) i =
     let !(# s', d' #) = setBitInteger# s d i in J# s' d'
 {-# NOINLINE setBitInteger #-}
